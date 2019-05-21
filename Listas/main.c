@@ -23,6 +23,20 @@ int main(void){
 		printf("Elemento não encontrado\n");
 	else
 		printf("Encontrou elemento %d\n", aux);
+
+	delete_date(list, 10);
+	printf("\n\n");
+	show_all(list);
+
+	List* list2;
+	list2 = create_list();
+	list2 = insert_list(list2, 20);
+	list2 = insert_list(list2, 5);	 
+	list2 = insert_list(list2, 2);
+
+	
+	printf("se iguais retorna 1 diferente 0: -> %d\n", compare(list, list2));
+	free_list(list);
 	
 	return 0;
-}
+}  

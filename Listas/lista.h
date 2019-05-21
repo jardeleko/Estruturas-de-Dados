@@ -1,16 +1,26 @@
 typedef struct list List; 
 
-/*funct create list*/
+/*criando a lista*/
 List* create_list();
 
-/*insertion list*/
+/*inserindo*/
 List* insert_list(List* l, int i);
 
-/* funct check list*/
+/*checando se existem valores*/
 int check(List* l);
 
-/*funct show list*/
+/*mostrando todos os dados*/
 void show_all(List* l);
 
+/*pesquisando o value em O(n)*/
 List* search(List* l, int value);
+
+/*apagando o value*/
+List* delete_date(List* l, int value);
+
+/*Liberando a lista*/
+void free_list(List* l);
+
+/*comparando listas*/
+int compare(List* l1, List* l2);
 
