@@ -7,6 +7,7 @@ int rbtree_init(rbtree *t) {
   if (!t->nil) return 0;
   t->nil->colour = BLACK;
   t->root = t->nil;
+  printf("  return 1\n");
   return 1;
 }
 
@@ -71,6 +72,26 @@ void right_rotate(rbtree *t, rbnode *x) {
   /* exercise! */
 }
 
+int rbtree_insert(rbtree *t, int key) {
+  rbnode *z = malloc(sizeof(rbnode)), *x, *y;
+  if (!z) return 0;
+  z->key = key;
+  x = t->root; y = t->nil;
+  while (x != t->nil) {
+    y = x;
+    if (key < x->key) x = x->left;
+    else x = x->right;
+  }
+  z->parent = y;
+  if (y == t->nil) t->root = z;
+  else if (y->key < key) y->right = z;
+  else y->left = z;
+  z->left = z->right = t->nil;
+  z->colour = RED;
+  _rb_insert_fixup(t, z);
+  return 1;
+}
+
 void _rb_insert_fixup(rbtree *t, rbnode *z) {
   rbnode *y;
   while (z->parent->colour == RED) {
@@ -97,26 +118,6 @@ void _rb_insert_fixup(rbtree *t, rbnode *z) {
       /* exercise */
     }}
   t->root->colour = BLACK;
-}
-
-int rbtree_insert(rbtree *t, int key) {
-  rbnode *z = malloc(sizeof(rbnode)), *x, *y;
-  if (!z) return 0;
-  z->key = key;
-  x = t->root; y = t->nil;
-  while (x != t->nil) {
-    y = x;
-    if (key < x->key) x = x->left;
-    else x = x->right;
-  }
-  z->parent = y;
-  if (y == t->nil) t->root = z;
-  else if (y->key < key) y->right = z;
-  else y->left = z;
-  z->left = z->right = t->nil;
-  z->colour = RED;
-  _rb_insert_fixup(t, z);
-  return 1;
 }
 
 void rbtree_erase(rbtree *t, int key) {
