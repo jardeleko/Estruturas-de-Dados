@@ -1,5 +1,6 @@
 all: main 
 
 main: 
-	gcc -c exe10.c -Wall -ansi 
-	gcc exe10.o -o iot
+	gcc -c func.c -Wall -ansi -O2
+	gcc func.o -o io
+
